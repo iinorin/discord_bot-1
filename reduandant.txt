@@ -1,0 +1,42 @@
+client.on('interactionCreate',  (interaction) => {
+  console.log(interaction);
+  interaction.reply("Why would u ping");
+});
+
+client.on('interactionCreate', (intraection)=>{
+  intreaction.reply("Oh what");
+
+});
+
+
+// Set the bot's presence status
+  client.user.setPresence({
+      activity: { 
+        name: 'misaka.worst', // Update this to your desired status message
+        type: 'PLAYING' // You can change the activity type (e.g., WATCHING, LISTENING, PLAYING)
+      },
+      status: 'online' // You can change the status (e.g., online, idle, dnd, invisible)
+  
+    });
+
+
+
+    client.on('message', async message => {
+    if (message.content === '!sendEmptyMessage') {
+        // Attempting to send an empty message
+        try {
+            const channel = await client.channels  //.fetch(channelId);
+            // Check if message content is empty
+            const content = 'This is a non-empty message'; // Example content
+            if (content) {
+                // Sending the message if content is not empty
+                const sentMessage = await channel.send(content);
+                console.log('Message sent successfully:', sentMessage.content);
+            } else {
+                console.log('Message content is empty. Not sending.');
+            }
+        } catch (error) {
+            console.error('Error sending message:', error);
+        }
+    }
+});
