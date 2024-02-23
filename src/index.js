@@ -2,7 +2,7 @@
 import dotenv from 'dotenv'
 dotenv.config()
 
-import { Client, Embed, GatewayIntentBits, IntentsBitField, EmbedBuilder } from 'discord.js';
+import { Client, GatewayIntentBits, IntentsBitField, EmbedBuilder } from 'discord.js';
 const client = new Client({
   intents: [
     IntentsBitField.Flags.Guilds,
@@ -13,7 +13,7 @@ const client = new Client({
 });
 
 client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
+  console.log(`Logged in as a ${client.user.tag}!`);
 
 });
 
@@ -67,6 +67,30 @@ client.on('interactionCreate', (interaction) => {
   interaction.reply({embeds: [embed]})
   }
 });
+
+client.on("messageCreate", (message) => {
+
+  if(message.content === "inori"){
+    const embed = new EmbedBuilder()
+    .setTitle('I am Inori')
+    .setDescription('I work For Funeral Parlour')
+    .setColor('Random')
+    .setAuthor({ name: 'Invite Link', iconURL: process.env.INORITHUMB, url:process.env.BOTINVURL  })
+    .setThumbnail(process.env.INORITHUMB)
+    .setImage(process.env.INOCCGIF)
+    .setURL(process.env.BOTINVURL)
+    .setTimestamp()
+	  .setFooter({ text: 'Made by Misaka', iconURL: process.env.INORITHUMV})
+    .addFields(
+      { name: 'Regular field title', value: 'Some value here' },
+      { name: '\u200B', value: '\u200B' },
+      { name: 'Inline field title', value: 'Some value here', inline: true },
+      { name: 'Inline field title', value: 'Some value here', inline: true },
+    )
+    .addFields({ name: 'Inline field title', value: 'Some value here', inline: true })
+    message.channel.send({embeds: [embed]})
+    }
+  });
 
 
 client.login(process.env.TOKEN);
