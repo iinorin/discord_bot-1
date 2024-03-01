@@ -22,10 +22,7 @@ client.on("messageCreate", (message) => {
   console.log(message.content);
   // message.reply({
         // content: "Misaka sees You"
-    // content : "spade chan i wanna lewd you"        
-        // content : "I will rock you world tonight"        
-    // content : "Oreo Go back"       
-    // content : "Chutiya Hikage"       
+        
 
   // });
 });
