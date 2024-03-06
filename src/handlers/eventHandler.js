@@ -18,5 +18,5 @@ module.exports = (client) => {
         await eventFunction(client, arg);
       }
     });
-  }
+  } 
 };
