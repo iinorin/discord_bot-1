@@ -1,4 +1,4 @@
-const { Client,GatewayIntentBits, ActivityType, IntentsBitField} = require('discord.js');
+const { Client, ActivityType, IntentsBitField} = require('discord.js');
 
 // const client = new Client({
 //     intents: [

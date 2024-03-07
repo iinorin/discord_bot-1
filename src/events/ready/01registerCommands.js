@@ -51,6 +51,19 @@ module.exports = async (client) => {
       }
     }
   } catch (error) {
-    console.log(`TThere was an error: ${error}`);
+    console.log(`TThere was some error: ${error}`);
   }
 };
+
+const { REST, Routes } = require('discord.js');
+const { clientIdd,guildId, token } = require('../../../config.json');
+
+const rest = new REST().setToken(token);
+
+rest.put(Routes.applicationCommands(clientIdd), { body: [] })
+	.then(() => console.log('Successfully deleted all application commands.'))
+	.catch(console.error); 
+
+rest.put(Routes.applicationGuildCommands(clientIdd, guildId), { body: [] })
+	.then(() => console.log('Successfully deleted all guild commands.'))
+	.catch(console.error);
