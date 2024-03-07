@@ -203,3 +203,5 @@ rest.put(Routes.applicationCommands(clientIdd), { body: [] })
 rest.put(Routes.applicationGuildCommands(clientIdd, guildId), { body: [] })
 	.then(() => console.log('Successfully deleted all guild commands.'))
 	.catch(console.error);
+
+  Codes which are to be used or deleted
