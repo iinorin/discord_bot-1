@@ -4,6 +4,11 @@ const eventHandler = require('./handlers/eventHandler');
 
 
 require('./botPresence/botPresence.js');
+const handleEmbeds = require('./embeds/embeds.js'); // Import the embeds function
+// const slashCommandBuilder =
+ require('./slashCommandsBuilder/slashCommandsBuilder.js');
+
+
 
 
 const client = new Client({
@@ -17,6 +22,10 @@ const client = new Client({
 
 eventHandler(client);
 
+client.on('messageCreate', async (message) => {
+   handleEmbeds(message);
+});
 
 
+module.exports = client;
 client.login(process.env.TOKEN);

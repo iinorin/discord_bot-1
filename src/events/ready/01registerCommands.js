@@ -52,6 +52,7 @@ module.exports = async (client) => {
     }
   } catch (error) {
     console.log(`TThere was some error: ${error}`);
+    console.error(`An error occurred in the AFK command: ${error.stack}`);
   }
 };
 

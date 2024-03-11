@@ -62,8 +62,15 @@ module.exports = async (client, interaction) => {
       }
     }
 
+        if (commandObject.deferReply) {
+            await interaction.deferReply();
+        }
+
     await commandObject.callback(client, interaction);
+    // await commandObject.execute(client, interaction);
+
   } catch (error) {
-    console.log(`There was an error running this command: ${error}`);
+    console.log(`There was an error running this dd command: ${error}`);
+    console.log(`There was an error running this dd command: ${error.stack}`);
   }
 };
