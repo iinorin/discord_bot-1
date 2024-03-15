@@ -205,3 +205,87 @@ rest.put(Routes.applicationGuildCommands(clientIdd, guildId), { body: [] })
 	.catch(console.error);
 
   Codes which are to be used or deleted
+
+
+
+
+
+
+Button builder for poll command with action builder and button builder //
+ callback: async (client, interaction) => {
+      
+            const question = interaction.options.getString('question');
+            const options = [];
+    
+            // Collect options from command options
+            for (let i = 1; i <= 12; i++) {
+                const option = interaction.options.getString(`option${i}`);
+                if (option) {
+                    options.push(option.trim());
+                }
+            }
+    
+            if (options.length < 2) {
+                return await interaction.reply({ content: 'Please provide at least 2 options.', ephemeral: true });
+            }
+    
+            // Generate buttons using ButtonBuilder and ActionRowBuilder
+            const components = generateButtons(options);
+    
+            const embed = new EmbedBuilder()
+                .setColor('#ff9900')
+                .setTitle('Poll')
+                .setDescription(question)
+                .addFields(
+                    { name: 'Options', value: options.map((option, index) => `${index + 1}. ${option}`).join('\n') }
+                )
+                .toJSON();
+    
+            try {
+                // Send poll embed with buttons
+                const sentMessage = await interaction.reply({ content: 'Here is your poll:', embeds: [embed], components, ephemeral: true });
+    
+                // Await interaction with sent message
+                const filter = (interaction) => interaction.message.id === sentMessage.id;
+                const collector = interaction.channel.createMessageComponentCollector({ filter, time: 60000 });
+    
+                collector.on('collect', async (interaction) => {
+                    const optionIndex = parseInt(interaction.customId.split('_')[1]) - 1;
+                    if (!isNaN(optionIndex) && optionIndex >= 0 && optionIndex < options.length) {
+                        await interaction.deferUpdate();
+                        await interaction.message.react(getNumberEmoji(optionIndex + 1));
+                    }
+                });
+    
+                collector.on('end', async () => {
+                    await sentMessage.edit({ components: [] });
+                });
+            } catch (error) {
+                console.error('Error creating poll:', error);
+                await interaction.reply({ content: 'Failed to create poll. Please try again.', ephemeral: true });
+            }
+        },
+    };
+    
+    // Function to generate message buttons for options
+    function generateButtons(options) {
+        const rows = [];
+        let currentRow = new ActionRowBuilder();
+
+        for (let i = 0; i < options.length; i++) {
+            const button = new ButtonBuilder()
+                .setCustomId(`option_${i + 1}`)
+                // .setLabel(options[i])
+                .setLabel(`${i + 1}`)
+                .setStyle(ButtonStyle.Primary);
+
+             currentRow.addComponents(button);
+    
+             if (currentRow.components.length === 5 || i === options.length - 1) {
+                rows.push(currentRow);
+                // Reset current row for the next set of buttons
+                currentRow = new ActionRowBuilder();
+            }
+        }
+        return rows;
+    }

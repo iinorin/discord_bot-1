@@ -39,7 +39,7 @@ module.exports = async (client) => {
             `⏩ Skipping registering command "${name}" as it's set to delete.`
           );
           continue;
-        }
+        }+
 
         await applicationCommands.create({
           name,

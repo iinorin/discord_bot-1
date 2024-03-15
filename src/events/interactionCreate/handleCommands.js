@@ -66,7 +66,8 @@ module.exports = async (client, interaction) => {
             await interaction.deferReply();
         }
 
-    await commandObject.callback(client, interaction);
+    await commandObject.callback(client,interaction);
+    // await commandObject.callback(interaction);
     // await commandObject.execute(client, interaction);
 
   } catch (error) {
