@@ -38,6 +38,7 @@ module.exports = {
 
         const embed = new EmbedBuilder()
             .setTitle('Rock, Paper, Scissors')
+            .setColor('Random')
             .addFields({ name: 'You chose:', value: playerChoice})
             .addFields({ name: 'Bot\'s Choice:', value: botChoice})
             .addFields({ name: 'Result:', value: result})

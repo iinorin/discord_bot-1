@@ -10,15 +10,19 @@ async function fetchGifs(action) {
     const response = await axios.get(url);
     const data = response.data;
 
-    console.log("API Response Data:", data);
+    console.log("API Response Data:", data); // Log the response data to inspect its structure
 
     if (!data.results || !Array.isArray(data.results)) {
       throw new Error("No results found or results is not an array");
     }
 
-    const gifs = data.results.map((result) => ({
-      url: result.url,
-    }));
+    const gifs = data.results.map((result) => {
+      if (result.url) {
+        return { url: result.url }; // Adjusted to use 'url' property
+      } else {
+        throw new Error("No media found or media is not an array");
+      }
+    });
 
     return gifs;
   } catch (error) {
@@ -26,6 +30,8 @@ async function fetchGifs(action) {
     return [];
   }
 }
+
+
 
 async function getRandomGif(action) {
   const gifs = await fetchGifs(action);
