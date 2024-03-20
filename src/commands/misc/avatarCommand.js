@@ -5,8 +5,7 @@ const {
     ApplicationCommandOptionType,
     EmbedBuilder,
   } = require('discord.js');
-const { callback } = require('./ping');
-  
+
   module.exports = {
     name: 'avatar',
     description: 'Shows the avatar of the mentioned user.',
