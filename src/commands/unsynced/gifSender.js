@@ -3,8 +3,8 @@ const { ApplicationCommandOptionType, EmbedBuilder } = require("discord.js");
 require("dotenv").config();
 
 async function fetchGifs(action) {
-  const tenorAPIKey = process.env.TENORAPI;
-  const url = `https://tenor.googleapis.com/v2/search?q=anime${action}&key=${tenorAPIKey}&client_key=discord bot&limit=8`;
+  const giphyAPIKey = process.env.GIPHYAPI;
+  const url = `https://api.giphy.com/v1/gifs/search?q=anime+${action}&api_key=${giphyAPIKey}&limit=8`;
 
   try {
     const response = await axios.get(url);
@@ -12,13 +12,13 @@ async function fetchGifs(action) {
 
     console.log("API Response Data:", data); // Log the response data to inspect its structure
 
-    if (!data.results || !Array.isArray(data.results)) {
+    if (!data.data || !Array.isArray(data.data) || data.data.length === 0) {
       throw new Error("No results found or results is not an array");
     }
 
-    const gifs = data.results.map((result) => {
-      if (result.url) {
-        return { url: result.url }; // Adjusted to use 'url' property
+    const gifs = data.data.map((gif) => {
+      if (gif.images && gif.images.original && gif.images.original.url) {
+        return { url: gif.images.original.url }; // Adjusted to use 'url' property
       } else {
         throw new Error("No media found or media is not an array");
       }
@@ -36,6 +36,8 @@ async function getRandomGif(action) {
   const randomIndex = Math.floor(Math.random() * gifs.length);
   return gifs[randomIndex];
 }
+
+
 
 module.exports = {
   name: "reaction",
@@ -58,6 +60,12 @@ module.exports = {
         { name: "bonk", value: "bonk" },
       ],
     },
+    {
+      name: "user",
+      description: "The user to react to.",
+      type: ApplicationCommandOptionType.User,
+      required: true,
+    },
   ],
   async callback(client, interaction) {
     await interaction.deferReply();
@@ -65,19 +73,20 @@ module.exports = {
     const action = interaction.options.getString("action");
     const randomGif = await getRandomGif(action);
 
+    const user = interaction.options.getUser("user");
+    const username = user.username;
+
     if (!randomGif) {
       return interaction.editReply(`No gifs found for action: ${action}`);
     }
-    console.log(randomGif.url);
 
     const embed = new EmbedBuilder()
-      .setTitle("Title")
-
-      // .setImage('https://media1.tenor.com/m/6QAwJhmtZm0AAAAC/die-i-will-find-you.gif');
+      .setTitle( `${interaction.user.username} ${action}s! ${username} `)
+      .setColor("Random")
       .setImage(randomGif.url);
 
-    await interaction.editReply(randomGif.url);
-    await interaction.channel.send({ embeds: [embed] });
-    console.log(embed)
+    await interaction.editReply({ embeds: [embed] });
+
+
   },
 };
