@@ -192,7 +192,7 @@ client.on('interactionCreate', (intraection)=>{
 
 
 const { REST, Routes } = require('discord.js');
-const { clientIdd,guildId, token } = require('../../../config.json');
+const { clientIdd,Id, token } = require('../../../config.json');
 
 const rest = new REST().setToken(token);
 
