@@ -42,6 +42,7 @@ async function getRandomGif(action) {
 module.exports = {
   name: "reaction",
   description: "Fetches an anime-related gif based on the provided action.",
+  
   options: [
     {
       name: "action",

@@ -48,3 +48,4 @@ client.on("messageCreate", async (message) => {
 
 module.exports = client;
 client.login(process.env.TOKEN);
+
