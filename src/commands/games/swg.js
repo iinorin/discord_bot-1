@@ -18,7 +18,7 @@ function playGame(userChoice) {
 module.exports = {
     name: 'swg',
     description: 'Play snake water gun game.',
-    options: [
+    options: [ 
         {
             name: 'choice',
             description: 'Choose your option',
