@@ -17,7 +17,7 @@ module.exports = {
   async callback(client, interaction) {
     const { options } = interaction;
     const avatar = options.getAttachment("new-avatar");
-    console.log(options);
+    console.log(options); 
 
     async function sendMessage(message) {
       const embed = new EmbedBuilder()
@@ -26,7 +26,7 @@ module.exports = {
 
       await interaction.reply({ embeds: [embed], ephemeral: true });
     }
-    if (   
+    if (
       avatar.contentType !== "image/gif" &&
       avatar.contentType !== "image/png" &&
       avatar.contentType !== "image/jpeg"

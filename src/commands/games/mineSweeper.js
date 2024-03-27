@@ -6,7 +6,7 @@ module.exports = {
 
   async callback(client, intreaction) {
     const Game = new Minesweeper({
-      message: message,
+      message: intreaction,
       isSlashGame: false,
       embed: {
         title: "Minesweeper",
