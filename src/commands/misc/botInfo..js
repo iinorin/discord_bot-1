@@ -42,7 +42,7 @@ module.exports = {
     const embed = new EmbedBuilder()
       .setColor("Blue")
       .setAuthor({ name: name, iconURL: icon })
-      .setThumbnail(`${icon}`)
+      .setThumbnail(`${icon}`) 
       .setFooter({ text: "Bot ID: 1207271901366587412 " })
       .setTimestamp()
       .addFields({
