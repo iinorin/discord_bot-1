@@ -33,6 +33,8 @@ module.exports = {
         
         const embed = new EmbedBuilder()
             .setColor('#0099ff')
+            
+            .setAuthor({ name: `${user.username}`, iconURL: `${user.displayAvatarURL}` })
             .setDescription(`User Information: ${user.username}`)
             .setThumbnail(user.displayAvatarURL({ dynamic: true }))
             .addFields(
