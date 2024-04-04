@@ -31,7 +31,7 @@ module.exports = async (client) => {
             options,
           });
 
-          console.log(`🔁 Edited command "${name}".`);
+          // console.log(`🔁 Edited command "${name}".`);
         }
       } else {
         if (localCommand.deleted) {
@@ -52,7 +52,22 @@ module.exports = async (client) => {
     }
   } catch (error) {
     console.log(`TThere was some error: ${error}`);
-    console.error(`An error occurred in the AFK command: ${error.stack}`);
+    console.error(`An error occurred in the command: ${error.stack}`);
   }
 };
 
+//Code to delete the code
+// const { REST, Routes } = require('discord.js');
+// const { clientIdd,guildId } = require('../../../config.json');
+// require("dotenv").config();
+
+
+// const rest = new REST().setToken(process.env.TOKEN);
+
+// rest.put(Routes.applicationCommands(clientIdd), { body: [] })
+// 	.then(() => console.log('Successfully deleted all application commands.'))
+// 	.catch(console.error); 
+
+// rest.put(Routes.applicationGuildCommands(clientIdd, guildId), { body: [] })
+// 	.then(() => console.log('Successfully deleted all guild commands.'))
+// 	.catch(console.error); 

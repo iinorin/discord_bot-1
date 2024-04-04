@@ -3,7 +3,7 @@ const { ApplicationCommandOptionType } = require("discord.js");
 module.exports = {
   name: "echo",
   description: "Echo the Messages User Sends",
-  // deleted: Boolean,
+//   deleted: Boolean,
 
   options: [
     {

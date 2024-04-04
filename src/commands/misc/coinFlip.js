@@ -18,7 +18,8 @@ module.exports = {
     ],
 
     async callback(client, interaction) {
-        const amount = interaction.options.getInteger('amount') || 1;
+        const amount = interaction.options.getInteger('amount') || 1; 
+        console.log(amount);
         
         // Ensure amount is between 1 and 3
         const coinCount = Math.min(Math.max(amount, 1), 3);
