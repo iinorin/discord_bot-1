@@ -30,7 +30,7 @@ module.exports = {
         
 
       
-        
+         
         const embed = new EmbedBuilder()
             .setColor('#0099ff')
             
@@ -58,3 +58,5 @@ module.exports = {
         await interaction.reply({ embeds: [embed] });
     },
 };
+
+//properties

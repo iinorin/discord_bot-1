@@ -25,24 +25,7 @@ const client = new Client({
   ],
 });
 
-const connectToDB = async () => {
-  try {
-    const connectionString = process.env.MONGODB_URI;
-
-    if (!connectionString) {
-      throw new Error("MongoDB connection string (MONGODB_URI) not found.");
-    }
-
-    await mongoose.connect(connectionString);
-    console.log("Connected to DB.");
-    eventHandler(client);
-  } catch (error) {
-    console.error(`Error connecting to MongoDB: ${error}`);
-  }
-};
-
-// Call the connectToDB function
-connectToDB();
+eventHandler(client);
 
 client.on("messageCreate", async (message) => {
   handleEmbeds(message);
